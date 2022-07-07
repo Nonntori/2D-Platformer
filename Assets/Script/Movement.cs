@@ -1,5 +1,8 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animation))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Movement : MonoBehaviour
 {
     [SerializeField] private Player _player; 
@@ -14,6 +17,8 @@ public class Movement : MonoBehaviour
     private Vector2 _position;
     private bool _isGround;
     private float _groundRadius = 0.3f;
+    private const string _jump = "Jump";
+    private const string _run = "Run";
 
     private void Start()
     {
@@ -36,7 +41,7 @@ public class Movement : MonoBehaviour
     private void Jump()
     {
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x * Time.deltaTime, _jumpForce);
-        _animator.SetTrigger("Jump");
+        _animator.SetTrigger(_jump);
     }
 
     private void Move()
@@ -47,13 +52,13 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(_speed * Time.deltaTime, 0, 0);
-            _animator.SetTrigger("Run");
+            _animator.SetTrigger(_run);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(_speed * Time.deltaTime * -1, 0, 0);
-            _animator.SetTrigger("Run");
+            _animator.SetTrigger(_run);
 
         }
     }

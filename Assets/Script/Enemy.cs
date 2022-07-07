@@ -38,8 +38,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            Transform playerTransform = player.GetComponent<Transform>();
-            playerTransform.position = player.Die();
+            player.transform.position = player.Die();
         }
     }
 }
